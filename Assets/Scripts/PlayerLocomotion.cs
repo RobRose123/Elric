@@ -4,15 +4,74 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Transform camerObject;
+    InputHandler inputHandler;
+    Vector3 moveDirection;
+
+    [HideInInspector]
+    public Transform myTransform;
+
+    public new Rigidbody rigidbody;
+    public GameObject noramlCamera;
+
+    [Header("Stats")]
+    [SerializeField]
+    float movementSpeed = 5;
+    [SerializeField]
+    float rotationSpeed = 10;
+
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
+        inputHandler = GetComponent<InputHandler>();
+        camerObject = Camera.main.transform;
+        myTransform = transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        float delta = Time.deltaTime;
+
+        inputHandler.TickInput(delta);
+
+        moveDirection = camerObject.forward * inputHandler.vertical;
+        moveDirection += camerObject.right * inputHandler.horizontal;
+        moveDirection.Normalize();
+
+        float speed = movementSpeed;
+        moveDirection *= speed;
+
+        Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+        rigidbody.velocity = projectedVelocity;
     }
+
+    #region Movement
+    Vector3 normalVector;
+    Vector3 targetPosition;
+
+    private void HandlerRotation(float delta)
+    {
+        Vector3 targetDir = Vector3.zero;
+        float moveOverride = inputHandler.moveAmount;
+
+        targetDir = camerObject.forward * inputHandler.vertical;
+        targetDir += camerObject.right * inputHandler.horizontal;
+
+        targetDir.Normalize();
+        targetDir.y = 0;
+
+        if (targetDir == Vector3.zero)
+            targetDir = myTransform.forward;
+
+        float rs = rotationSpeed;
+
+        Quaternion tr = Quaternion.LookRotation(targetDir);
+        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+        myTransform.rotation = targetRotation;
+
+
+    }
+
+    #endregion
 }
