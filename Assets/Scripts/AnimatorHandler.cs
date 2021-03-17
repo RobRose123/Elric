@@ -68,8 +68,8 @@ public class AnimatorHandler : MonoBehaviour
         }
         #endregion
 
-        anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-        anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+        anim.SetFloat(vertical, verticalMovement, 0.1f, Time.deltaTime);
+        anim.SetFloat(horizontal, horizontalMovement, 0.1f, Time.deltaTime);
     }
 
     public void CanRotate()
