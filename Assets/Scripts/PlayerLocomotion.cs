@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
-    Transform camerObject;
+    Transform cameraObject;
     InputHandler inputHandler;
     Vector3 moveDirection;
 
@@ -27,7 +27,7 @@ public class PlayerLocomotion : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         inputHandler = GetComponent<InputHandler>();
         animatorHandler = GetComponentInChildren<AnimatorHandler>();
-        camerObject = Camera.main.transform;
+        cameraObject = Camera.main.transform;
         myTransform = transform;
         animatorHandler.Initialize();
     }
@@ -37,9 +37,42 @@ public class PlayerLocomotion : MonoBehaviour
         float delta = Time.deltaTime;
 
         inputHandler.TickInput(delta);
+        HandleMovement(delta);
+        HandleRollingAndSprinting(delta);
+    }
 
-        moveDirection = camerObject.forward * inputHandler.vertical;
-        moveDirection += camerObject.right * inputHandler.horizontal;
+    #region Movement
+    Vector3 normalVector;
+    Vector3 targetPosition;
+
+    private void HandleRotation(float delta)
+    {
+        Vector3 targetDir = Vector3.zero;
+        float moveOverride = inputHandler.moveAmount;
+
+        targetDir = cameraObject.forward * inputHandler.vertical;
+        targetDir += cameraObject.right * inputHandler.horizontal;
+
+        targetDir.Normalize();
+        targetDir.y = 0;
+
+        if (targetDir == Vector3.zero)
+            targetDir = myTransform.forward;
+
+        float rs = rotationSpeed;
+
+        Quaternion tr = Quaternion.LookRotation(targetDir);
+        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+        myTransform.rotation = targetRotation;
+
+
+    }
+
+    public void HandleMovement(float delta)
+    {
+        moveDirection = cameraObject.forward * inputHandler.vertical;
+        moveDirection += cameraObject.right * inputHandler.horizontal;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
@@ -57,32 +90,28 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
-    #region Movement
-    Vector3 normalVector;
-    Vector3 targetPosition;
-
-    private void HandleRotation(float delta)
+    public void HandleRollingAndSprinting(float delta)
     {
-        Vector3 targetDir = Vector3.zero;
-        float moveOverride = inputHandler.moveAmount;
+        if (animatorHandler.anim.GetBool("isInteracting"))
+            return;
 
-        targetDir = camerObject.forward * inputHandler.vertical;
-        targetDir += camerObject.right * inputHandler.horizontal;
+        if(inputHandler.rollFlag)
+        {
+            moveDirection = cameraObject.forward * inputHandler.vertical;
+            moveDirection += cameraObject.right * inputHandler.horizontal;
 
-        targetDir.Normalize();
-        targetDir.y = 0;
-
-        if (targetDir == Vector3.zero)
-            targetDir = myTransform.forward;
-
-        float rs = rotationSpeed;
-
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
-
-        myTransform.rotation = targetRotation;
-
-
+            if(inputHandler.moveAmount > 0)
+            {
+                animatorHandler.PlayTargetAnimation("Rolling", true);
+                moveDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                myTransform.rotation = rollRotation;
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation("BackStep", true);
+            }
+        }
     }
 
     #endregion

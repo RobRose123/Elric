@@ -1204,6 +1204,9 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
+  b_Input: 1
+  rollFlag: 0
+  isInteracting: 0
 --- !u!114 &1714792492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,6 +1255,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1714792495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714792490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1475fcc75e8f6104eb7e895150adb419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1714792496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,6 +1280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  inputHandler: {fileID: 0}
+  playerLocomotion: {fileID: 0}
   canRotate: 1
 --- !u!114 &1714792497
 MonoBehaviour:
@@ -1335,6 +1352,7 @@ GameObject:
   - component: {fileID: 2044637440}
   - component: {fileID: 2044637439}
   - component: {fileID: 2044637438}
+  - component: {fileID: 2044637442}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -1417,6 +1435,25 @@ Transform:
   m_Father: {fileID: 6062703}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2044637442
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044637437}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 997059eb12ae56e48bb1f609fb146419, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2128134426
 GameObject:
   m_ObjectHideFlags: 0
