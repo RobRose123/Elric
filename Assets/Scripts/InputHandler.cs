@@ -66,6 +66,7 @@ public class InputHandler : MonoBehaviour
     {
         MoveInput(delta);
         HandleRollInput(delta);
+        HandleAttackInput(delta);
     }
 
     private void MoveInput(float delta)
@@ -101,7 +102,7 @@ public class InputHandler : MonoBehaviour
     private void HandleAttackInput(float delta)
     {
         inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-        inputActions.PlayerActions.RT.performed += i => rb_Input = true;
+        inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
         if(rb_Input)
         {
