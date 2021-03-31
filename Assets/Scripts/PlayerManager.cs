@@ -13,10 +13,11 @@ public class PlayerManager : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    void Update()
+    private void LateUpdate()
     {
-        inputHandler.isInteracting = anim.GetComponent("isInteracting");
         inputHandler.rollFlag = false;
         inputHandler.sprintFlag = false;
+        inputHandler.rb_Input = false;
+        inputHandler.rt_Input = false;
     }
 }
