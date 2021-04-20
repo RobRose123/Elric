@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1249142391138773603}
   - component: {fileID: 1249142391135349371}
   - component: {fileID: 1249142391136348347}
+  - component: {fileID: 1047258086832009881}
+  - component: {fileID: 1557320193641822751}
   m_Layer: 0
   m_Name: 2Hand-Sword
   m_TagString: Untagged
@@ -79,6 +81,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1047258086832009881
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249142391138612739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.42596376, y: 0.25149384, z: 2.1625788}
+  m_Center: {x: -0.17600854, y: -0.11556619, z: 1.2542678}
+--- !u!114 &1557320193641822751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249142391138612739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a859ea811b830934d97f8db2faefaa4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1439055385446629639
 GameObject:
   m_ObjectHideFlags: 0
