@@ -6,6 +6,12 @@ public class PlayerManager : MonoBehaviour
 {
     InputHandler inputHandler;
     Animator anim;
+    CameraHandler cameraHandler;
+
+    private void Awake()
+    {
+        cameraHandler = FindObjectOfType<CameraHandler>();
+    }
 
     void Start()
     {

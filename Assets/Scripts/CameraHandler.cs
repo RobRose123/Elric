@@ -29,6 +29,7 @@ public class CameraHandler : MonoBehaviour
         myTransform = transform;
         defaultPosition = cameraTransform.localPosition.z;
         ignorLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+        targetTransform = FindObjectOfType<PlayerManager>().transform;
     }
 
     public void FollowTarget(float delta)
