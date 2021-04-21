@@ -25,5 +25,13 @@ public class PlayerManager : MonoBehaviour
         inputHandler.sprintFlag = false;
         inputHandler.rb_Input = false;
         inputHandler.rt_Input = false;
+
+        float delta = Time.deltaTime;
+
+        if(cameraHandler != null)
+        {
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandlerCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+        }
     }
 }
