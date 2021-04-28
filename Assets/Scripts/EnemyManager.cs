@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : CharacterStats
 {
     EnemyLocomationManager enemyLocomationManager;
-    bool isPreformingAction;
+    public bool isPreformingAction;
 
     [Header("A.I Settings")]
     public float detectionRadius = 20;
@@ -19,6 +19,11 @@ public class EnemyManager : CharacterStats
 
     private void Update()
     {
+     
+    }
+
+    private void FixedUpdate()
+    {
         HandlerCurrentAction();
     }
 
@@ -27,6 +32,10 @@ public class EnemyManager : CharacterStats
         if(enemyLocomationManager.currentTarget == null)
         {
             enemyLocomationManager.HandleDetection();
+        }
+        else
+        {
+            enemyLocomationManager.HandleMoveToTarget();
         }
     }
 }
