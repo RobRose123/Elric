@@ -9,6 +9,7 @@ public class EnemyAnimatorManager : AnimatorManager
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        enemyLocomationManager = GetComponentInParent<EnemyLocomationManager>();
     }
 
     private void OnAnimatorMove()

@@ -7,7 +7,7 @@ public class EnemyLocomationManager : MonoBehaviour
 {
     EnemyManager enemyManager;
     EnemyAnimatorManager enemyAnimatorManager;
-    NavMeshAgent navmeshAgent;
+    NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
     public CharacterStats currentTarget;
@@ -22,13 +22,13 @@ public class EnemyLocomationManager : MonoBehaviour
     {
         enemyManager = GetComponent<EnemyManager>();
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-        navmeshAgent = GetComponentInChildren<NavMeshAgent>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         enemyRigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        navmeshAgent.enabled = false;
+        navMeshAgent.enabled = false;
         enemyRigidbody.isKinematic = false;
     }
 
@@ -61,14 +61,15 @@ public class EnemyLocomationManager : MonoBehaviour
 
         if(enemyManager.isPreformingAction)
         {
-            enemyAnimatorManager.anim.SetFloat("Vetical", 0, 0.1f, Time.deltaTime);
-            navmeshAgent.enabled = false;
+            enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+            navMeshAgent.enabled = false;
         }
         else
         {
             if(distanceFromTarget > stoppingDistance)
             {
                 enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+                //enemyAnimatorManager.OnAnimatorMove();
             }
             else if(distanceFromTarget <= stoppingDistance)
             {
@@ -77,11 +78,12 @@ public class EnemyLocomationManager : MonoBehaviour
         }
 
         HandleRotateTowardsTarget();
-        navmeshAgent.transform.localPosition = Vector3.zero;
-        navmeshAgent.transform.localRotation = Quaternion.identity;
+
+        navMeshAgent.transform.localPosition = Vector3.zero;
+        navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
-    private void HandleRotateTowardsTarget()
+    public void HandleRotateTowardsTarget()
     {
         if(enemyManager.isPreformingAction)
         {
@@ -99,13 +101,13 @@ public class EnemyLocomationManager : MonoBehaviour
         }
         else
         {
-            Vector3 relativeDirection = transform.InverseTransformDirection(navmeshAgent.desiredVelocity);
+            Vector3 relativeDirection = transform.InverseTransformDirection(navMeshAgent.desiredVelocity);
             Vector3 targetVelocity = enemyRigidbody.velocity;
 
-            navmeshAgent.enabled = true;
-            navmeshAgent.SetDestination(currentTarget.transform.position);
+            navMeshAgent.enabled = true;
+            navMeshAgent.SetDestination(currentTarget.transform.position);
             enemyRigidbody.velocity = targetVelocity;
-            transform.rotation = Quaternion.Slerp(transform.rotation, navmeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, navMeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
         }
     }
 }

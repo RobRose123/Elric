@@ -19,7 +19,7 @@ public class EnemyManager : CharacterStats
 
     private void Update()
     {
-
+     
     }
 
     private void FixedUpdate()

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimatorHandler : AnimatorManager
 {
-    public Animator anim;
     public InputHandler inputHandler;
     public PlayerLocomotion playerLocomotion;
     int vertical;
