@@ -68,7 +68,7 @@ public class InputHandler : MonoBehaviour
     {
         MoveInput(delta);
         HandleRollInput(delta);
-        HandleAttackInput(delta);
+        //HandleAttackInput(delta);
     }
 
     private void MoveInput(float delta)
@@ -102,17 +102,17 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void HandleAttackInput(float delta)
-    {
+    //private void HandleAttackInput(float delta)
+    //{
 
-        if(rb_Input)
-        {
-            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-        }
+    //    if(rb_Input)
+    //    {
+    //        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+    //    }
 
-        if(rt_Input)
-        {
-            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
-        }
-    }
+    //    if(rt_Input)
+    //    {
+    //        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+    //    }
+    //}
 }

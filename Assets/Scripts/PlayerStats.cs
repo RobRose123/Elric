@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : CharacterStats
 {
@@ -38,6 +39,8 @@ public class PlayerStats : CharacterStats
         {
             currentHealth = 0;
             animatorHandler.PlayTargetAnimation("Death", true);
+            Scene thisScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(thisScene.name);
         }
     }
 }
